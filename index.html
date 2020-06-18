@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Player</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ribeye+Marrow&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Iceberg&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header><h1>MUSIC CLOUD</h1></header>
+    <div id="background">
+      <img
+        src="https://mk0analyticsindf35n9.kinstacdn.com/wp-content/uploads/2018/12/image.jpg"
+        alt="background-image"
+        id="background-image"
+      />
+    </div>
+    <div id="overlap">
+      <div id="player-card">
+        <img
+          id="player-thumb"
+          src="https://mk0analyticsindf35n9.kinstacdn.com/wp-content/uploads/2018/12/image.jpg"
+          alt=""
+        />
+
+        <div id="player-desc">
+          <h1 id="song-title">song 1.mp3</h1>
+          <div id="controls">
+            <div id="main-control">
+              <img
+                class="icon"
+                src="./icons/step-backward-solid.svg"
+                alt="step-back"
+                id="step-back"
+              />
+              <img
+                id="play-pause"
+                src="./icons/play-solid.svg"
+                alt="play-icon"
+              />
+              <img
+                class="icon"
+                src="./icons/step-forward-solid.svg"
+                alt="step-forward"
+                id="step-forward"
+              />
+            </div>
+            <div id="progress-bar">
+              <div id="current-progress">
+                <div id="progress-handle"></div>
+              </div>
+            </div>
+            <div id="vol-duration">
+              <div id="duration">00:00/00:00</div>
+              <div id="vol-wrap">
+                <div id="vol">
+                  <img
+                    src="./icons/minus-solid.svg"
+                    class="icon icon1"
+                    alt="minus"
+                    id="vol-min"
+                  />
+                  <img
+                    src="./icons/volume-down-solid.svg"
+                    class="icon"
+                    alt="speaker"
+                    id="speaker"
+                  />
+                  <img
+                    src="./icons/plus-solid.svg"
+                    class="icon icon1"
+                    alt="plus"
+                    id="vol-plus"
+                  />
+                </div>
+                <div id="vol-bar">
+                  <div id="vol-curr-progress"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
