@@ -196,12 +196,20 @@ $(function () {
   });
 
   let currentVol = audio.volume;
-  let volBarWidth = volBar.offsetWidth;
+  let volBarWidth = volBar[0].offsetWidth;
   let myWidth = currentVol * volBarWidth;
   volCurrProgress.css({ width: myWidth + 'px' });
   audio.pause();
   playPause.attr('src', './icons/play-solid.svg'); //audio was playing as soon as it was loading so did this
 
+  /////////volBar click listener
+  volBar.click(function (e) {
+    let seekTo = e.offsetX / volBar[0].offsetWidth;
+    seekTo = seekTo.toFixed(1);
+
+    audio.volume = seekTo;
+    $('#vol-curr-progress').css({ width: seekTo * 100 + '%' });
+  });
   /////////playlist arrow-style
   $('#playlist').on({
     mouseenter: function () {
