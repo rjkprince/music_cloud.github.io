@@ -25,7 +25,7 @@ $(function () {
       songForward();
     });
     stepBack.click(function () {
-      songForward();
+      songBackward();
     });
     generatePLaylist();
   });
@@ -49,6 +49,11 @@ $(function () {
       audio.pause();
       playPause.attr('src', './icons/play-solid.svg');
     }
+    $('.playlist-item').css({
+      'background-color': 'rgba(255, 255, 255, 0.1)',
+    });
+    let myPlaylist = $('.playlist-item').eq(currentSong);
+    myPlaylist.css({ 'background-color': '#d1e079' });
   }
 
   function songForward() {
@@ -70,6 +75,11 @@ $(function () {
       audio.pause();
       playPause.attr('src', './icons/play-solid.svg');
     }
+    $('.playlist-item').css({
+      'background-color': 'rgba(255, 255, 255, 0.1)',
+    });
+    let myPlaylist = $('.playlist-item').eq(currentSong);
+    myPlaylist.css({ 'background-color': '#d1e079' });
   }
   playPause.click(function () {
     if (audio.paused) {
