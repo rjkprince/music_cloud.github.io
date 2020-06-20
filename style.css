@@ -272,7 +272,7 @@ header h1 {
 
 @media (max-width: 700px) {
   #player-card {
-    width: 80%;
+    width: 100%;
     transform: none;
     transform: translate(10%, 6%);
   }
