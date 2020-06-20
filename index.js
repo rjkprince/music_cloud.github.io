@@ -259,7 +259,12 @@ $(function () {
       $('#playlist-items').append(playItem);
     }
   }
-
+  $('#playlist').on({
+    mouseleave: function () {
+      document.getElementById('search-box').value = '';
+      $('.playlist-item').removeClass('hidden');
+    },
+  });
   /////////////////sending new audio to backend
   function dataSend(data) {
     $.post(
@@ -286,5 +291,23 @@ $(function () {
       };
       dataSend(data);
     }
+  });
+  //////////////////enabling search box
+  $('#search-box').on({
+    input: function () {
+      let myInput = $('#search-box')[0].value;
+      myInput = myInput.toLowerCase();
+      if (myInput != null) {
+        for (let i = 0; i < response.length; i++) {
+          if (response[i].title.toLowerCase().indexOf(myInput) == -1) {
+            $('.playlist-item').eq(i).addClass('hidden');
+          } else {
+            $('.playlist-item').eq(i).removeClass('hidden');
+          }
+        }
+      } else {
+        $('.playlist-item').removeClass('hidden');
+      }
+    },
   });
 });

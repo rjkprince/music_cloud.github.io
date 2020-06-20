@@ -116,6 +116,9 @@ header h1 {
   cursor: pointer;
   box-shadow: 0 0 10px blueviolet;
 }
+#progress-handle:hover {
+  transform: scale(1.1);
+}
 #vol-duration {
   margin-top: 10px;
   width: 70%;
@@ -211,12 +214,14 @@ header h1 {
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 #playlist:hover {
   height: 400px;
 }
 #playlist-items {
   overflow: auto;
+  margin-top: 35px;
 }
 #playlist-items::-webkit-scrollbar {
   display: none;
@@ -234,6 +239,39 @@ header h1 {
   padding: 5px 10px;
   border-radius: 10px;
   box-sizing: border-box;
+}
+
+.search-box {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 5px 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 55px;
+}
+#search-box {
+  background: none;
+  width: 100%;
+  padding: 0px 10px;
+  font-size: 18px;
+  color: aqua;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  letter-spacing: 1px;
+  margin: 0;
+}
+#search-box::placeholder {
+  color: aqua;
+  font-family: 'Iceberg', cursive;
 }
 .playlist-item:hover {
   background-color: rgba(255, 255, 255, 0.2);
@@ -268,6 +306,9 @@ header h1 {
 #arrow {
   width: 25px;
   transition: transform 1s linear;
+}
+.hidden {
+  display: none;
 }
 
 @media (max-width: 700px) {
