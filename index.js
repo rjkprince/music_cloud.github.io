@@ -1,7 +1,7 @@
 $(function () {
   audio = new Audio();
   var playPause = $('#play-pause');
-  var currentProgress = $('#current-progress');
+
   var duration = $('#duration');
   var songTitle = $('#song-title');
   var backgroundImg = $('#background-image');
@@ -32,6 +32,7 @@ $(function () {
   });
 
   function songBackward() {
+    $('#progress')[0].value = 0;
     if (currentSong != 0) currentSong--;
     else currentSong = response.length - 1;
     var currentThumb = response[currentSong].thumbnail;
@@ -102,8 +103,12 @@ $(function () {
         '%, #fff ' +
         playedPercentage +
         '%, white 100%)';
-      $('#progress')[0].value = playedPercentage;
-      $('#progress').css({ background: str });
+
+      if (isNaN(playedPercentage)) $('#progress')[0].value = 0;
+      else {
+        $('#progress')[0].value = playedPercentage;
+        $('#progress').css({ background: str });
+      }
 
       let currentTime = audio.currentTime;
       let fullTime = audio.duration;
@@ -167,6 +172,7 @@ $(function () {
   });
 
   //////// adding seekable functionality
+
   $('#progress').on({
     input: function () {
       let str =
