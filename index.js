@@ -104,8 +104,10 @@ $(function () {
         playedPercentage +
         '%, white 100%)';
 
-      if (isNaN(playedPercentage)) $('#progress')[0].value = 0;
-      else {
+      if (isNaN(playedPercentage)) {
+        $('#progress')[0].value = 0;
+        $('#progress').css({ background: '#fff' });
+      } else {
         $('#progress')[0].value = playedPercentage;
         $('#progress').css({ background: str });
       }
