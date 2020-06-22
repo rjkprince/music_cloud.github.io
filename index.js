@@ -8,6 +8,7 @@ $(function () {
   var songThumb = $('#player-thumb');
   var stepBack = $('#step-back');
   var stepForward = $('#step-forward');
+
   $.get('https://5ee2489c8b27f30016094881.mockapi.io/music', function (
     response
   ) {
@@ -95,7 +96,14 @@ $(function () {
     audio.addEventListener('timeupdate', function () {
       var playedPercentage = audio.currentTime / audio.duration;
       playedPercentage = playedPercentage * 100;
-      currentProgress.css({ width: playedPercentage + '%' });
+      let str =
+        'linear-gradient(to right, blueviolet 0%, blueviolet ' +
+        playedPercentage +
+        '%, #fff ' +
+        playedPercentage +
+        '%, white 100%)';
+      $('#progress')[0].value = playedPercentage;
+      $('#progress').css({ background: str });
 
       let currentTime = audio.currentTime;
       let fullTime = audio.duration;
@@ -159,12 +167,19 @@ $(function () {
   });
 
   //////// adding seekable functionality
-  progressBar = $('#progress-bar');
-  progressBar.click(function (e) {
-    let seekTo = e.offsetX / progressBar[0].offsetWidth;
-
-    audio.currentTime = seekTo * audio.duration;
-    currentProgress.css({ width: seekTo * 100 + '%' });
+  $('#progress').on({
+    input: function () {
+      let str =
+        'linear-gradient(to right, blueviolet 0%, blueviolet ' +
+        this.value +
+        '%, #fff ' +
+        this.value +
+        '%, white 100%)';
+      $('#progress').css({
+        background: str,
+      });
+      audio.currentTime = (this.value * audio.duration) / 100;
+    },
   });
 
   ////////// audio ended then next
@@ -185,31 +200,40 @@ $(function () {
   }
 
   //////designing volume bar
-  var volBar = $('#vol-bar');
+  $('#curr-vol').on({
+    input: function () {
+      let str =
+        'linear-gradient(to right, #fd019d 0%, #fd019d ' +
+        this.value +
+        '%, #fff ' +
+        this.value +
+        '%, white 100%)';
+      $('#curr-vol').css({
+        background: str,
+      });
+      let myval = this.value / 100;
+      myval = myval.toFixed(1);
+      audio.volume = myval;
+    },
+  });
+
   var volCurrProgress = $('#vol-curr-progress');
   audio.addEventListener('volumechange', function () {
     let currentVol = audio.volume;
-    let volBarWidth = volBar[0].offsetWidth;
-
-    let myWidth = currentVol * volBarWidth;
-    volCurrProgress.css({ width: myWidth + 'px' });
+    let str =
+      'linear-gradient(to right, #fd019d 0%, #fd019d ' +
+      currentVol * 100 +
+      '%, #fff ' +
+      currentVol * 100 +
+      '%, white 100%)';
+    $('#curr-vol').css({
+      background: str,
+    });
   });
 
-  let currentVol = audio.volume;
-  let volBarWidth = volBar[0].offsetWidth;
-  let myWidth = currentVol * volBarWidth;
-  volCurrProgress.css({ width: myWidth + 'px' });
   audio.pause();
   playPause.attr('src', './icons/play-solid.svg'); //audio was playing as soon as it was loading so did this
 
-  /////////volBar click listener
-  volBar.click(function (e) {
-    let seekTo = e.offsetX / volBar[0].offsetWidth;
-    seekTo = seekTo.toFixed(1);
-
-    audio.volume = seekTo;
-    $('#vol-curr-progress').css({ width: seekTo * 100 + '%' });
-  });
   /////////playlist arrow-style
   $('#playlist').on({
     mouseenter: function () {
@@ -310,4 +334,14 @@ $(function () {
       }
     },
   });
+  ////////adding mobile screen smaller playcard switch
+  // $('#player-card').click(function () {
+  //   if ($('#player-thumb').hasClass('hide')) {
+  //     $('#player-thumb').removeClass('hide');
+  //     $('#player-card').removeClass('changeHeight');
+  //   } else {
+  //     $('#player-thumb').addClass('hide');
+  //     $('#player-card').addClass('changeHeight');
+  //   }
+  // });
 });

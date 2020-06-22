@@ -20,6 +20,7 @@ header h1 {
 #background {
   width: 100%;
   height: calc(100vh - 70px);
+
   overflow: hidden;
 }
 #background img {
@@ -38,8 +39,8 @@ header h1 {
   color: #fff;
   display: flex;
   flex-direction: column;
-  height: 65vh;
-  width: 28vw;
+  height: 430px;
+  width: 400px;
   background-color: rgb(0, 0, 0);
   transform: translate(50%, 15%);
   border-radius: 10px;
@@ -91,34 +92,36 @@ header h1 {
   padding: 15px 15px;
 }
 #progress-bar {
-  margin-top: 25px;
+  margin-top: 10px;
   width: 70%;
+}
+#progress {
+  -webkit-appearance: none;
+
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  width: 100%;
   height: 5px;
-  background-color: #fff;
+  background: linear-gradient(
+    to right,
+    blueviolet 0%,
+    blueviolet 0%,
+    #fff 0%,
+    #fff 100%
+  );
   border-radius: 10px;
   cursor: pointer;
 }
-#current-progress {
-  width: 0%;
-  height: 5px;
-  border-radius: 10px;
-  background-color: blueviolet;
-  position: relative;
-}
-#progress-handle {
+#progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
   width: 20px;
   height: 20px;
-  background-color: blueviolet;
-  position: absolute;
-  right: 0;
-  top: -150%;
   border-radius: 20px;
-  cursor: pointer;
+  background: blueviolet;
   box-shadow: 0 0 10px blueviolet;
 }
-#progress-handle:hover {
-  transform: scale(1.1);
-}
+
 #vol-duration {
   margin-top: 10px;
   width: 70%;
@@ -145,17 +148,30 @@ header h1 {
   margin-top: 10px;
 
   width: 70%;
+}
+#curr-vol {
+  width: 100%;
   height: 5px;
-  background-color: #fff;
+  -webkit-appearance: none;
+
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  background: linear-gradient(
+    to right,
+    #fd019d 0%,
+    #fd019d 50%,
+    #fff 50%,
+    #fff 100%
+  );
   border-radius: 10px;
   cursor: pointer;
 }
-#vol-curr-progress {
-  width: 50%;
+#curr-vol::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 5px;
   height: 5px;
-  border-radius: 10px;
-  background-color: #fd019d;
-  position: relative;
 }
 
 #vol-wrap {
@@ -312,10 +328,18 @@ header h1 {
 }
 
 @media (max-width: 700px) {
+  .hide {
+    display: none;
+  }
+
   #player-card {
     width: 100%;
+
     transform: none;
     transform: translate(10%, 6%);
+  }
+  .changeHeight {
+    height: 30vh !important;
   }
   header h1 {
     font-size: 30px;
@@ -337,7 +361,7 @@ header h1 {
     display: block;
   }
   #background {
-    height: calc(100vh + 400px);
+    height: calc(100vh + 850px);
   }
   #playlist {
     width: 100%;
