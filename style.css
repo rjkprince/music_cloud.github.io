@@ -374,3 +374,9 @@ header h1 {
     transition: none;
   }
 }
+@media (max-width: 400px) {
+  #curr-vol {
+    width: 90px;
+    margin-left: -10px;
+  }
+}
