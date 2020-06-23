@@ -21,7 +21,7 @@ header h1 {
 .example {
   margin: auto;
   transform: translateY(-138px);
-  width: 800px;
+  width: 1000px;
   height: 200px;
   outline: none;
 }
