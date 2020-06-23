@@ -1,7 +1,7 @@
 $(function () {
   audio = new Audio();
   var playPause = $('#play-pause');
-
+  var responseArray = [];
   var duration = $('#duration');
   var songTitle = $('#song-title');
   var backgroundImg = $('#background-image');
@@ -12,6 +12,8 @@ $(function () {
   $.get('https://5ee2489c8b27f30016094881.mockapi.io/music', function (
     response
   ) {
+    responseArray = response;
+
     window.response = response;
     window.currentSong = 0;
     window.currentThumb = response[0].thumbnail;
@@ -29,6 +31,7 @@ $(function () {
       songBackward();
     });
     generatePLaylist();
+    generateCarousel();
   });
 
   function songBackward() {
@@ -225,7 +228,6 @@ $(function () {
     },
   });
 
-  var volCurrProgress = $('#vol-curr-progress');
   audio.addEventListener('volumechange', function () {
     let currentVol = audio.volume;
     let str =
@@ -342,14 +344,50 @@ $(function () {
       }
     },
   });
-  ////////adding mobile screen smaller playcard switch
-  // $('#player-card').click(function () {
-  //   if ($('#player-thumb').hasClass('hide')) {
-  //     $('#player-thumb').removeClass('hide');
-  //     $('#player-card').removeClass('changeHeight');
-  //   } else {
-  //     $('#player-thumb').addClass('hide');
-  //     $('#player-card').addClass('changeHeight');
-  //   }
-  // });
+  ///////////adding carousel
+  $('.example').html('');
+
+  function generateCarousel() {
+    console.log(responseArray[0].thumbnail);
+    for (let i = 0; i < responseArray.length; i++) {
+      let thisImg = $('<img>').attr('src', responseArray[i].thumbnail);
+      thisImg.click(function () {
+        currentSong = i;
+        var currentThumb = responseArray[currentSong].thumbnail;
+        var currentUrl = responseArray[currentSong].url;
+        var currentTitle = responseArray[currentSong].title;
+        audio.src = currentUrl;
+        songTitle.text(currentTitle);
+        backgroundImg.attr('src', currentThumb);
+        songThumb.attr('src', currentThumb);
+        audio.play();
+        $('.playlist-item').css({
+          'background-color': 'rgba(255, 255, 255, 0.1)',
+        });
+        let myPlaylist = $('.playlist-item').eq(currentSong);
+        myPlaylist.css({ 'background-color': '#d1e079' });
+        playPause.attr('src', './icons/pause-solid.svg');
+      });
+      $('.example').append(thisImg);
+    }
+    $('.example').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      speed: 2000,
+      fade: false,
+      arrows: true,
+
+      autoplay: true,
+      pauseOnFocus: false,
+      pauseOnHover: false,
+      responsive: [
+        {
+          breakpoint: 600,
+          settings: {
+            arrows: false,
+          },
+        },
+      ],
+    });
+  }
 });
